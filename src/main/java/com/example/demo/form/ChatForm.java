@@ -1,8 +1,11 @@
 package com.example.demo.form;
 
-public class ChatForm {
+import jakarta.validation.constraints.NotBlank;
 
+public class ChatForm {
+	@NotBlank(message = "名前を入力してください")
 	private String name1;
+	@NotBlank(message = "コメントを入力してください")
 	private String comment1;
 
 	public ChatForm() {

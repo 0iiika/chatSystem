@@ -4,30 +4,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<link rel="stylesheet" th:href="@{/chatstyle.css}">
 </head>
 
 <body>
 	<h1 th:text="${title}"></h1>
-	<form method="get" action="#" th:action="@{/complete}" th:object="${chat}">
+	<form method="get" action="#" th:action="@{/complete}" th:object="${chatForm}">
 		<p><input type="text" name="name1" placeholder="お名前" /> :
-		<div th:if="${#fields.hasErrors('name1')}" th:errors="*{name1}">エラー</div>
 
-		<input type="text" name="comment1" size="80" th:value="*{comment1}"
-			placeholder="コメント:500文字まで。Enterキーでも投稿できます。" />
-		<div th:if="${#fields.hasErrors('comment1')}" th:errors="*{comment1}">エラー</div>
-		<input type="submit" value="投稿" />
+			<input type="text" name="comment1" size="80" placeholder="コメント:500文字まで。Enterキーでも投稿できます。" />
+			<input type="submit" value="投稿" />
 		</p>
+
+		<div th:if="${#fields.hasErrors('name1')}" th:errors="*{name1}">エラー</div>
+		<div th:if="${#fields.hasErrors('comment1')}" th:errors="*{comment1}">エラー</div>
 	</form>
 	<table>
-		<tr>
+		<!--<tr>
 			<th>名前</th>
 			<th>コメント</th>
-		</tr>
+		</tr>-->
+
 		<tr th:each="res : ${dbList}">
 			<td th:text="${res.name}">名前</td>
-			<td th:text="${res.comment}">コメント</td>
+			<!--<td th:text="${res.comment}">コメント</td>-->
+			<td class="chat-bubble__text left" th:text="${res.comment}">コメント</td>
+			</p>
+
+
 		</tr>
 	</table>
+	<p><a href="/kanri" th:href="@{/kanri}">管理者画面へ</a></p>
 </body>
 
 </html>

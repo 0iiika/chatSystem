@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 public class EntChat {
 
+	private int id;
 	private String name;
 	private String comment;
 
@@ -23,6 +24,14 @@ public class EntChat {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

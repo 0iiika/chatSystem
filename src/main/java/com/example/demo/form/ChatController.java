@@ -34,25 +34,26 @@ public class ChatController {
 		List<EntChat> list = chatdao.searchDb();
 		model.addAttribute("dbList", list);
 		//ここまで
-		model.addAttribute("chat",chat);
+		model.addAttribute("chat", chat);
 		return "form/view";
 	};
 
 	@RequestMapping("/complete")
-	public String complete(@Validated ChatForm chatform, BindingResult result, Model model) {
-
+	public String complete(@Validated ChatForm chat, BindingResult result, Model model) {
+		model.addAttribute("chat", chat);
 		//ここから登録
 		model.addAttribute("title", "チャットルーム");
 		EntChat entchat = new EntChat();
-		entchat.setName(chatform.getName1());
-		entchat.setComment(chatform.getComment1());
-		chatdao.insertDb(entchat);
-		//ここまで
+		entchat.setName(chat.getName1());
+		entchat.setComment(chat.getComment1());
 
 		//もしエラーがあればエラー表示
 		if (result.hasErrors()) {
+			model.addAttribute("title", "チャットルーム");
 			return "form/view";
 		}
+		chatdao.insertDb(entchat);
+		//ここまで
 
 		//ここから一覧取得
 		List<EntChat> list = chatdao.searchDb();
